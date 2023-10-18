@@ -1,0 +1,179 @@
+[gd_scene load_steps=20 format=3 uid="uid://baynibb7k83wq"]
+
+[ext_resource type="Script" path="res://scenes/level.gd" id="1_6saoy"]
+[ext_resource type="Texture2D" uid="uid://dt37efymkod2n" path="res://assets/level/MainScene.png" id="1_pb4pk"]
+[ext_resource type="Texture2D" uid="uid://coyrpkbfwng3l" path="res://assets/level/Landscape.png" id="2_f4dkd"]
+[ext_resource type="Texture2D" uid="uid://d1sgu4yijayuc" path="res://assets/level/Machines.png" id="3_ms8y4"]
+[ext_resource type="Texture2D" uid="uid://c70olyxm8p1l1" path="res://assets/foods/happle.png" id="5_2joty"]
+[ext_resource type="Material" uid="uid://kyxyf8hklqcp" path="res://assets/outline.tres" id="6_1m470"]
+[ext_resource type="Texture2D" uid="uid://cibr00qdn8o2x" path="res://assets/brain.png" id="7_qey3m"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_drqg0"]
+atlas = ExtResource("2_f4dkd")
+region = Rect2(512, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rqt3w"]
+atlas = ExtResource("2_f4dkd")
+region = Rect2(640, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gb760"]
+atlas = ExtResource("2_f4dkd")
+region = Rect2(256, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ikvoq"]
+atlas = ExtResource("2_f4dkd")
+region = Rect2(384, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_580bn"]
+atlas = ExtResource("2_f4dkd")
+region = Rect2(0, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ell57"]
+atlas = ExtResource("2_f4dkd")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_yylab"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_drqg0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rqt3w")
+}],
+"loop": true,
+"name": &"high",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gb760")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ikvoq")
+}],
+"loop": true,
+"name": &"med",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_580bn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ell57")
+}],
+"loop": true,
+"name": &"normal",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f55to"]
+atlas = ExtResource("3_ms8y4")
+region = Rect2(0, 0, 128, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2xtjt"]
+atlas = ExtResource("3_ms8y4")
+region = Rect2(128, 0, 128, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nlalg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f55to")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2xtjt")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qgl4o"]
+bg_color = Color(0.835294, 0, 0, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_canyj"]
+bg_color = Color(0.501961, 0.054902, 0.713726, 1)
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+
+[node name="Level" type="Node2D"]
+script = ExtResource("1_6saoy")
+
+[node name="Main" type="Sprite2D" parent="."]
+z_index = 1
+position = Vector2(576, 324)
+scale = Vector2(9, 10.125)
+texture = ExtResource("1_pb4pk")
+
+[node name="Landscape" type="AnimatedSprite2D" parent="."]
+position = Vector2(576, 324)
+scale = Vector2(9, 10.125)
+sprite_frames = SubResource("SpriteFrames_yylab")
+animation = &"normal"
+
+[node name="Machines" type="AnimatedSprite2D" parent="."]
+z_index = 2
+position = Vector2(576, 324)
+scale = Vector2(9, 10.125)
+sprite_frames = SubResource("SpriteFrames_nlalg")
+
+[node name="FoodSlot0" type="Marker2D" parent="."]
+position = Vector2(378, 324)
+
+[node name="FoodSlot1" type="Marker2D" parent="."]
+position = Vector2(567, 324)
+
+[node name="FoodSlot2" type="Marker2D" parent="."]
+position = Vector2(756, 324)
+
+[node name="resetFoodTimer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ProgressBar" type="ProgressBar" parent="HUD"]
+z_index = 2
+offset_left = 384.0
+offset_top = 144.0
+offset_right = 768.0
+offset_bottom = 171.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_qgl4o")
+value = 5.0
+
+[node name="ProgressBar2" type="ProgressBar" parent="HUD"]
+z_index = 2
+offset_left = 384.0
+offset_top = 208.0
+offset_right = 768.0
+offset_bottom = 235.0
+theme_override_styles/fill = SubResource("StyleBoxFlat_canyj")
+value = 5.0
+
+[node name="TextureRect" type="TextureRect" parent="HUD"]
+z_index = 1
+layout_mode = 0
+offset_left = 312.0
+offset_top = 104.0
+offset_right = 408.0
+offset_bottom = 200.0
+texture = ExtResource("5_2joty")
+
+[node name="TextureRect" type="TextureRect" parent="HUD/TextureRect"]
+z_index = 1
+material = ExtResource("6_1m470")
+offset_left = 24.0
+offset_top = 96.0
+offset_right = 72.0
+offset_bottom = 144.0
+texture = ExtResource("7_qey3m")
+
+[connection signal="timeout" from="resetFoodTimer" to="." method="_on_reset_food_timer_timeout"]
