@@ -1,0 +1,50 @@
+[gd_scene load_steps=6 format=3 uid="uid://d12xiw7hwekjb"]
+
+[ext_resource type="Texture2D" uid="uid://hak3nm8iqupc" path="res://assets/foods/cafe.png" id="1_q4onn"]
+[ext_resource type="Script" path="res://scenes/food.gd" id="2_fam2c"]
+
+[sub_resource type="Animation" id="Animation_kkh6n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_31tjc"]
+resource_name = "fade_in"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.285714), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x6q8p"]
+_data = {
+"RESET": SubResource("Animation_kkh6n"),
+"fade_in": SubResource("Animation_31tjc")
+}
+
+[node name="Food" type="Sprite2D"]
+texture = ExtResource("1_q4onn")
+script = ExtResource("2_fam2c")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_x6q8p")
+}
